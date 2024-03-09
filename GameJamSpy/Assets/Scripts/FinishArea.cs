@@ -7,11 +7,9 @@ public class FinishArea : MonoBehaviour
 {
     public int isPlayerFinish = 0;
 
-    public SavePlayerMove savePlayerMove;
 
     private void Start()
     {
-        savePlayerMove = FindObjectOfType<SavePlayerMove>();
 
     }
     private void OnTriggerEnter(Collider other)
@@ -19,8 +17,6 @@ public class FinishArea : MonoBehaviour
         if(other.CompareTag("Player"))
         {
 
-            savePlayerMove.RecordPlayerPositionAndRotation();
-            savePlayerMove.SaveRecordedData();
             PlayerPrefs.SetInt("isPlayerFinish", 1);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 

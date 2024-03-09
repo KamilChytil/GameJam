@@ -61,11 +61,14 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     private void RotationEnemy()
-    {        
+    {
         Vector3 targetDirection = enemyPoints[currentPointIndex].position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        float angleToRotate = Quaternion.Angle(transform.rotation, targetRotation);
 
+        float direction = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5f * angleToRotate * direction);
     }
 
 
