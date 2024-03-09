@@ -29,7 +29,12 @@ public class PlayerMovement : MonoBehaviour
 			animator.SetFloat("moveY", dir.x);
 			return;
 		}
-
+	/*	else
+        {
+            cameraRoot.gameObject.SetActive(false);
+            enabled = false;
+        }
+*/
 		Quaternion animationRot = new Quaternion();
 
 		Ray r = Camera.main.ScreenPointToRay(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
@@ -40,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
 			Vector3 mouseDiff = hitInfo.point - transform.position;
 			//mouseDiff -= cameraRoot.position - transform.position;
 			transform.eulerAngles = new Vector3(0, Quaternion.LookRotation(mouseDiff, Vector3.up).eulerAngles.y, 0);
+
 
 
 			mouseDiff.x *= -1;
