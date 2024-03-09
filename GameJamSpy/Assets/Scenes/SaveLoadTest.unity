@@ -1193,6 +1193,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   cameraRoot: {fileID: 2124759106}
+  lightRoot: {fileID: 0}
+  gunFX: {fileID: 0}
+  gunParticles: {fileID: 0}
+  animator: {fileID: 0}
   finishArea: {fileID: 0}
 --- !u!4 &1605900152
 Transform:

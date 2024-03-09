@@ -5,21 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class FinishArea : MonoBehaviour
 {
-    public int isPlayerFinish = 0;
+	public static int playerFinished = 0;
 
 
-    private void Start()
-    {
-
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-
-            PlayerPrefs.SetInt("isPlayerFinish", 1);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-        }
-    }
+	private void Start()
+	{
+		playerFinished = PlayerPrefs.GetInt("replayActive", 0);
+	}
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			if(playerFinished == 0)
+			{
+				PlayerPositionRecorder.RecordPlayerPosition(other.transform);
+				PlayerPositionRecorder.SavePositionData();
+			}
+			setReplayActive(1);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
+	}
+	public static void setReplayActive(int value)
+	{
+		playerFinished = value;
+		PlayerPrefs.SetInt("replayActive", value);
+	}
 }
