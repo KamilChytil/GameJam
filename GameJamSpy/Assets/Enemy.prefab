@@ -127,7 +127,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   enemyShoot: {fileID: 4216678437638445023}
   isEnemyAlive: 0
 --- !u!54 &7200877550713290996
