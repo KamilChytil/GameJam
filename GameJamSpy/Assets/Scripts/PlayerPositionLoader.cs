@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEditor.Experimental.RestService;
+using System.Linq;
 
 public class PlayerPositionLoader : MonoBehaviour
 {
@@ -12,10 +13,9 @@ public class PlayerPositionLoader : MonoBehaviour
 
 	private int currentIndex = 0;
 
-	public int OnOffPLayerFinis = 0;
+	public bool setReplayInactive = false;
 
-	private float timer = 0f;
-	private float debugTimer = 0f;
+	private static float timer = 0f;
 
 	public static Vector2 moveDir = new Vector2();
 
@@ -23,23 +23,26 @@ public class PlayerPositionLoader : MonoBehaviour
 	private void Start()
 	{
 
-		if (OnOffPLayerFinis == 0)
+		timer = 0;
+		FinishArea.replayActive = PlayerPrefs.GetInt("replayActive", 0);
+
+		if (setReplayInactive)
 		{
+			File.Delete(PlayerPositionRecorder.saveFilePath);
 			FinishArea.setReplayActive(0);
 		}
 
-		
-		if (FinishArea.playerFinished == 1)
+
+		if (FinishArea.replayActive == 1)
 		{
 			LoadPositionDataFromJson();
-
 		}
 	}
 
 	private void Update()
 	{
 
-		if (FinishArea.playerFinished == 1)
+		if (FinishArea.replayActive == 1)
 		{
 
 			if (currentIndex < positions.Count)
@@ -62,13 +65,6 @@ public class PlayerPositionLoader : MonoBehaviour
 					transform.rotation = Quaternion.Lerp(rotations[currentIndex], rotations[nextIndex], timer / PlayerPositionRecorder.recordingInterval);
 				}
 			}
-			debugTimer += Time.deltaTime;
-			if (debugTimer >= 3f && debugTimer <= 3.1f)
-			{
-				//Debug.Log(debugTimer);
-
-				//Debug.Log(transform.position + "Load");
-			}
 		}
 
 	}
@@ -80,8 +76,8 @@ public class PlayerPositionLoader : MonoBehaviour
 
 		if (data != null)
 		{
-			positions = data.positions;
-			rotations = data.rotations;
+			positions = data.positions.ToList();
+			rotations = data.rotations.ToList();
 		}
 		else
 		{
@@ -94,10 +90,4 @@ public class PlayerPositionLoader : MonoBehaviour
 		LoadPositionDataFromJson();
 	}
 
-	[System.Serializable]
-	public class PositionData
-	{
-		public List<Vector3> positions;
-		public List<Quaternion> rotations;
-	}
 }
