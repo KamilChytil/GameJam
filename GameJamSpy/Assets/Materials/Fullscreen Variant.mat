@@ -27,8 +27,10 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Scale: 57.5
-    - _Threshold: 0.23
+    - _Rotate: 0
+    - _Scale: 74.17
+    - _Speed: 3
+    - _Threshold: 0.1
     m_Colors:
-    - _Color: {r: 0.24528301, g: 0.061320752, b: 0.061320752, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
