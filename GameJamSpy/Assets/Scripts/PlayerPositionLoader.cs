@@ -16,6 +16,7 @@ public class PlayerPositionLoader : MonoBehaviour
 
     public FinishArea finishArea;
 
+    
     public int OnOffPLayerFinis = 0;
 
     public float timer = 0f;
