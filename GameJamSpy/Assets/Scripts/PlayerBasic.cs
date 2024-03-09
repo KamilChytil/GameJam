@@ -19,5 +19,8 @@ public class PlayerBasic : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
         transform.position += movement * moveSpeed * Time.deltaTime;
+
+
+        
     }
 }

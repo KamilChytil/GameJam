@@ -9,13 +9,16 @@ public class EnemyShoot : MonoBehaviour
 
     public bool isPLayerInArea = false;
 
+    private float timer;
+
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
 
             isPLayerInArea = true;
-            Debug.Log("Player entered the trigger!");
+            Debug.Log(timer + "timer");
         }
     }
 
@@ -25,7 +28,7 @@ public class EnemyShoot : MonoBehaviour
         {
 
             isPLayerInArea = false;
-            Debug.Log("Player leave the trigger!");
+            //Debug.Log("Player leave the trigger!");
         }
     }
     void Start()
@@ -34,6 +37,6 @@ public class EnemyShoot : MonoBehaviour
 
     void Update()
     {
-        
+        timer += Time.deltaTime;
     }
 }

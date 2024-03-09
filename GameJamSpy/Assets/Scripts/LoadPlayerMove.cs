@@ -15,7 +15,7 @@ public class LoadPlayerMove : MonoBehaviour
     {
         finishArea = FindObjectOfType<FinishArea>();
         //NUTNÉ ZAPNOUT PRO RESET poté zakomentovat pomocí //
-        //PlayerPrefs.SetInt("isPlayerFinish", 0);
+        PlayerPrefs.SetInt("isPlayerFinish", 0);
         movementSpeed = 4f;
         finishArea.isPlayerFinish = PlayerPrefs.GetInt("isPlayerFinish", 0);
 
@@ -52,12 +52,17 @@ public class LoadPlayerMove : MonoBehaviour
     {
         if (recordedPositions == null || recordedPositions.Length == 0)
             return;
-
-        transform.position = Vector3.MoveTowards(transform.position, recordedPositions[currentPositionIndex], movementSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, recordedPositions[currentPositionIndex]) < 0.1f)
+        if(currentPositionIndex < recordedPositions.Length)
         {
-            currentPositionIndex = (currentPositionIndex + 1) % recordedPositions.Length;
+            Debug.Log(movementSpeed * Time.deltaTime+ "movementSpeed * Time.deltaTime");
+            Debug.Log(recordedPositions[currentPositionIndex] + "recordedPositions[currentPositionIndex]");
+            transform.position = Vector3.MoveTowards(transform.position, recordedPositions[currentPositionIndex], movementSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, recordedPositions[currentPositionIndex]) < 0.1f)
+            {
+                currentPositionIndex = (currentPositionIndex + 1);
+            }
+
         }
     }
 

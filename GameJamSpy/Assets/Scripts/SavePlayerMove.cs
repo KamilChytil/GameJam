@@ -8,8 +8,8 @@ public class SavePlayerMove : MonoBehaviour
     public GameObject playerGameObject;
     public Transform playerCurrentMove;
 
-    public int saveIntervalFrames = 60; 
-    private int framesSinceLastSave = 0;
+    private float saveIntervalTime = 1f; 
+    private float timeSinceLastSave = 0;
     private List<Vector3> recordedPositions = new List<Vector3>();
     private List<Quaternion> recordedRotations = new List<Quaternion>();
 
@@ -31,10 +31,10 @@ public class SavePlayerMove : MonoBehaviour
     {
         if(finishArea.isPlayerFinish == 0)
         {
-            framesSinceLastSave++;
-            if (framesSinceLastSave >= saveIntervalFrames)
+            timeSinceLastSave += Time.deltaTime;
+            if (timeSinceLastSave >= saveIntervalTime)
             {
-                framesSinceLastSave = 0;
+                timeSinceLastSave = 0;
                 RecordPlayerPositionAndRotation();
                 SaveRecordedData();
             }
@@ -43,13 +43,13 @@ public class SavePlayerMove : MonoBehaviour
 
     }
 
-    void RecordPlayerPositionAndRotation()
+    public void RecordPlayerPositionAndRotation()
     {
         recordedPositions.Add(transform.position);
         recordedRotations.Add(transform.rotation);
     }
 
-    void SaveRecordedData()
+    public void SaveRecordedData()
     {
         PlayerData playerData = new PlayerData();
         playerData.positions = recordedPositions.ToArray();
