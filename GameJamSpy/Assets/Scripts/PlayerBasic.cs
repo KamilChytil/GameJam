@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlayerBasic : MonoBehaviour
 {
-    public float moveSpeed = 5f; 
+    public float moveSpeed = 5f;
 
+    private void Start()
+    {
+        moveSpeed = 5f;
+    }
     // Update is called once per frame
     void Update()
     {

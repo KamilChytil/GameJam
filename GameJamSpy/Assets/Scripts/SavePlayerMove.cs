@@ -45,29 +45,23 @@ public class SavePlayerMove : MonoBehaviour
 
     void RecordPlayerPositionAndRotation()
     {
-        // Record player position and rotation
         recordedPositions.Add(transform.position);
         recordedRotations.Add(transform.rotation);
     }
 
     void SaveRecordedData()
     {
-        // Create a data object to hold recorded positions and rotations
         PlayerData playerData = new PlayerData();
         playerData.positions = recordedPositions.ToArray();
         playerData.rotations = recordedRotations.ToArray();
 
-        // Convert the data object to JSON
         string jsonData = JsonUtility.ToJson(playerData);
 
-        // Determine the file path outside of the Unity project
         string filePath = Path.Combine(Application.dataPath, "../player_data.json");
 
-        // Write the JSON data to a file
         File.WriteAllText(filePath, jsonData);
     }
 
-    // Data structure to hold player position and rotation
     [System.Serializable]
     public class PlayerData
     {

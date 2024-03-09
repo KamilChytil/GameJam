@@ -82,7 +82,7 @@ public class EnemyPatrol : MonoBehaviour
             timeToWait = 0f;
             RotationEnemy();
             transform.position = Vector3.MoveTowards(transform.position, enemyPoints[currentPointIndex].position, enemySpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < 0.1f)
+            if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < 1f)
             {
                 ChangePoint();
             }

@@ -4,7 +4,7 @@ using System.IO;
 public class LoadPlayerMove : MonoBehaviour
 {
     public string filePath = "player_data.json";
-    public float movementSpeed = 5f;
+    public float movementSpeed = 4f;
 
     private Vector3[] recordedPositions;
     private int currentPositionIndex = 0;
@@ -14,8 +14,9 @@ public class LoadPlayerMove : MonoBehaviour
     void Start()
     {
         finishArea = FindObjectOfType<FinishArea>();
-        PlayerPrefs.SetInt("isPlayerFinish", 0);
-
+        //NUTNÉ ZAPNOUT PRO RESET poté zakomentovat pomocí //
+        //PlayerPrefs.SetInt("isPlayerFinish", 0);
+        movementSpeed = 4f;
         finishArea.isPlayerFinish = PlayerPrefs.GetInt("isPlayerFinish", 0);
 
         if (finishArea.isPlayerFinish == 1)
@@ -30,13 +31,10 @@ public class LoadPlayerMove : MonoBehaviour
 
         if (File.Exists(fullPath))
         {
-            // Read JSON data from file
             string jsonData = File.ReadAllText(fullPath);
 
-            // Deserialize JSON data into PlayerData object
             PlayerData playerData = JsonUtility.FromJson<PlayerData>(jsonData);
 
-            // Assign recorded positions
             recordedPositions = playerData.positions;
         }
         else
@@ -47,7 +45,6 @@ public class LoadPlayerMove : MonoBehaviour
 
     void Update()
     {
-        // Move player along recorded positions
         MovePlayerAlongPath();
     }
 
@@ -56,13 +53,10 @@ public class LoadPlayerMove : MonoBehaviour
         if (recordedPositions == null || recordedPositions.Length == 0)
             return;
 
-        // Move towards the current position
         transform.position = Vector3.MoveTowards(transform.position, recordedPositions[currentPositionIndex], movementSpeed * Time.deltaTime);
 
-        // Check if reached the current position
         if (Vector3.Distance(transform.position, recordedPositions[currentPositionIndex]) < 0.1f)
         {
-            // Move to the next position
             currentPositionIndex = (currentPositionIndex + 1) % recordedPositions.Length;
         }
     }
