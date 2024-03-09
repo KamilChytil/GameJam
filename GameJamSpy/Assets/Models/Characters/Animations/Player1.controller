@@ -90,7 +90,7 @@ BlendTree:
     m_DirectBlendParameter: moveY
     m_Mirror: 0
   m_BlendParameter: moveY
-  m_BlendParameterY: noveX
+  m_BlendParameterY: moveX
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -186,7 +186,7 @@ BlendTree:
     m_DirectBlendParameter: moveY
     m_Mirror: 0
   m_BlendParameter: moveY
-  m_BlendParameterY: noveX
+  m_BlendParameterY: moveX
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -290,7 +290,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: noveX
+  - m_Name: moveX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0

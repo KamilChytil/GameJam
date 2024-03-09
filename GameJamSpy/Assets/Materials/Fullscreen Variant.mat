@@ -28,7 +28,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Rotate: 0
-    - _Scale: 74.17
+    - _Scale: 25
+    - _ScaleY: 1.2
     - _Speed: 3
     - _Threshold: 0.1
     m_Colors:
