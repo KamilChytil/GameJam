@@ -18,7 +18,7 @@ public class EnemyShoot : MonoBehaviour
         {
 
             isPLayerInArea = true;
-            Debug.Log(timer + "timer");
+            //Debug.Log(timer + "timer");
         }
     }
 
