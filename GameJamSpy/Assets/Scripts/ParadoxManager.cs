@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ParadoxManager : MonoBehaviour
@@ -158,8 +159,8 @@ public class ParadoxManager : MonoBehaviour
 		nextParadoxIndex = 0;
 		TimeManager.running = true;
 		TimeManager.elapsedTime = 0;
-		intelDone = true;
-		timeRiftDone = true;
+		intelDone = false;
+		timeRiftDone = false;
 		i.loseUI.SetActive(false);
 		i.winUI.SetActive(false);
 		paradoxAmount = Paradox.nextOrder;
