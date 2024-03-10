@@ -40,9 +40,12 @@ public class ParadoxManager : MonoBehaviour
 
 	static bool shouldReset = true;
 
+	public static float lastTime = 0;
+
 
 	private void Awake()
 	{
+		Time.timeScale = 1;
 		i = this;
 		ParadoxManager.resetList.Clear();
 	}
@@ -108,6 +111,7 @@ public class ParadoxManager : MonoBehaviour
 	{
 		Debug.Log("You win!");
 		i.winUI.SetActive(true);
+		Time.timeScale = 0;
 	}
 
 	public static void UpdateParadoxCounter()
@@ -142,6 +146,7 @@ public class ParadoxManager : MonoBehaviour
 
 	public static void EndRecording()
 	{
+		lastTime = TimeManager.elapsedTime;
 		PlayerMovement pm = i.player.GetComponent<PlayerMovement>();
 		pm.passive = true;
 		i.protector.SetActive(true);
@@ -155,6 +160,7 @@ public class ParadoxManager : MonoBehaviour
 
 	public static void ResetAll()
 	{
+		Time.timeScale = 1;
 		shouldReset = false;
 		nextParadoxIndex = 0;
 		TimeManager.running = true;

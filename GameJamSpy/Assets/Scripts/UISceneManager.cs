@@ -15,4 +15,15 @@ public class UISceneManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("Menu");
 	}
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			ReloadScene();
+		}
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			LoadMenu();
+		}
+	}
 }

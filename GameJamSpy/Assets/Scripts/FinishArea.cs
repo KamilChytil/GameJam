@@ -27,7 +27,7 @@ public class FinishArea : MonoBehaviour
 					ResetEverything();
 				}
 			}
-			else if (other.GetComponent<PlayerMovement>().passive)
+			else if (other.GetComponent<PlayerMovement>().passive && ParadoxManager.lastTime <= TimeManager.elapsedTime+1)
 			{
 				ParadoxManager.Win();
 			}
