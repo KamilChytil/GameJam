@@ -30,8 +30,9 @@ Material:
     - _Rotate: 0
     - _Scale: 25
     - _ScaleY: 1.2
+    - _ScreenFlash: 0
     - _Speed: 3
-    - _Threshold: 0.1
+    - _Threshold: 0.08
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

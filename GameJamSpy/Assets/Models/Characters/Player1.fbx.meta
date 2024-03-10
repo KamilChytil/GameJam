@@ -1,11 +1,34 @@
 fileFormatVersion: 2
-
 guid: 83574d97b52ad424e8783c38e127087a
-
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: belt
+    second: {fileID: 2100000, guid: 9685b8634ac908f44a8baecbfc36f420, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cloth
+    second: {fileID: 2100000, guid: d6fa1f3c30aff78479aa8de3b9dc37cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyes
+    second: {fileID: 2100000, guid: f1cf4648311923641ac222598004ec1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hair
+    second: {fileID: 2100000, guid: 3cb6a5dcf1fb0254893b61aef0f18aed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: aa06781cc7704034d8f1afc6da2ad064, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

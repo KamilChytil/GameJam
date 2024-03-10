@@ -5,64 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class FinishArea : MonoBehaviour
 {
-	public static int playerFinished = 0;
-    public TimeLine timeLine;
-    public GameObject prefab;
-
-    private bool hasLoadedPrefab = false;
-
-    private void Awake()
-    {
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
+	public static bool recording = true;
 
 
-    }
 	private void Start()
 	{
-		playerFinished = PlayerPrefs.GetInt("replayActive", 0);
-        timeLine = FindObjectOfType<TimeLine>();
-
+		recording = true;
 	}
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
-			if(playerFinished == 0)
+			if (recording)
 			{
-				PlayerPositionRecorder.RecordPlayerPosition(other.transform);
-				PlayerPositionRecorder.SavePositionData();
-                timeLine.isInFinish = true;
-                timeLine.gameTime = 0f;
-                timeLine.isLoad = true;
+				if (ParadoxManager.intelDone && ParadoxManager.timeRiftDone)
+				{
+					recording = false;
+					PlayerPositionRecorder.RecordPlayerPosition(other.transform);
+					PlayerPositionLoader.LoadData();
+					ParadoxManager.EndRecording();
+					ResetEverything();
+				}
 			}
-			setReplayActive(1);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			else if (other.GetComponent<PlayerMovement>().passive)
+			{
+				ParadoxManager.Win();
+			}
+
+			//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
-	public static void setReplayActive(int value)
+	private void ResetEverything()
 	{
-		playerFinished = value;
-		PlayerPrefs.SetInt("replayActive", value);
+
+		ParadoxManager.ResetAll();
 	}
-
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("jsem tu");
-
-        if (scene.name.Equals("SaveLoadTest"))
-        {
-            if (!hasLoadedPrefab && prefab != null)
-            {
-                Instantiate(prefab, transform.position, transform.rotation);
-                hasLoadedPrefab = true;
-            }
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
 }

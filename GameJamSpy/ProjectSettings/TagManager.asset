@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - RevertPoint
   - Enemy
-  - EnemyAgent
-  - Door
-  - Defender
   layers:
   - Default
   - TransparentFX
@@ -17,7 +15,7 @@ TagManager:
   - UI
   - Player
   - Walls
-  - 
+  - Enemy
   - 
   - 
   - 

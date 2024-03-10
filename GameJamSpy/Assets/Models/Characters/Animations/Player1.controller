@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 8605233577904728522, guid: aaf94c6ca11c6b94595b0ea7a0e3d31d,
+  m_Motion: {fileID: 8605233577904728522, guid: 5dcf863c3e5e1de4eaea7ce88264fff1,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -116,8 +116,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: moveY
     m_Mirror: 0
-  m_BlendParameter: moveY
-  m_BlendParameterY: moveX
+  m_BlendParameter: moveX
+  m_BlendParameterY: moveY
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -212,8 +212,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: moveY
     m_Mirror: 0
-  m_BlendParameter: moveY
-  m_BlendParameterY: moveX
+  m_BlendParameter: moveX
+  m_BlendParameterY: moveY
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -367,7 +367,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: moveY
     m_Type: 1
@@ -426,7 +426,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -178186393344216276, guid: aaf94c6ca11c6b94595b0ea7a0e3d31d,
+  m_Motion: {fileID: -178186393344216276, guid: 5dcf863c3e5e1de4eaea7ce88264fff1,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
