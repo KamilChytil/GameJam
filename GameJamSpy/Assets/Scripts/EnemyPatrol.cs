@@ -31,20 +31,23 @@ public class EnemyPatrol : MonoBehaviour
 		paradoxCauser = GetComponent<ParadoxCauser>();
 		animator = GetComponentInChildren<Animator>();
 		gunParticles = GetComponentInChildren<ParticleSystem>();
+		if (enemyPoints.Length == 0)
+		{
+			enemyPoints = new Transform[] { transform };
+		}
 	}
 
 	void Update()
 	{
 		if (alive == true)
 		{
-			if (viewCone.directSight == true && aimingTime <= 1f)
+			if (viewCone.directSight == true && aimingTime <= 1.5f)
 			{
-				animator.SetFloat("moveX", 1);
+				animator.SetBool("isWalking", false);
 				ShootingAtPlayer();
 			}
 			else
 			{
-				animator.SetFloat("moveX", 0);
 				if (!alreadyShot)
 				{
 					aimingTime = 0f;
@@ -52,18 +55,22 @@ public class EnemyPatrol : MonoBehaviour
 
 				Rotate();
 
-				transform.position = Vector3.MoveTowards(transform.position, enemyPoints[currentPointIndex].position, enemySpeed * Time.deltaTime);
-				if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < 1f)
+				if (enemyPoints.Length > 1)
 				{
-					ChangePoint();
+					animator.SetBool("isWalking", true);
+					transform.position = Vector3.MoveTowards(transform.position, enemyPoints[currentPointIndex].position, enemySpeed * Time.deltaTime);
+					if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < 1f)
+					{
+						ChangePoint();
+					}
 				}
+
 
 			}
 
 		}
 		else
 		{
-			Debug.Log("EnemyDead");
 
 		}
 	}
@@ -90,8 +97,9 @@ public class EnemyPatrol : MonoBehaviour
 		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
 		if (!alreadyShot && aimingTime >= .5f)
 		{
-			animator.SetTrigger("shoot");
-			ParadoxManager.Paradox p = paradoxCauser.CauseParadox();
+			transform.rotation = targetRotation;
+			animator.SetTrigger("Shoot");
+			ParadoxManager.Paradox p = paradoxCauser.CauseParadox("A guard was allowed to kill the agent.");
 			if (p != null)
 			{
 				p.indicator.transform.SetParent(transform, false);
@@ -105,20 +113,29 @@ public class EnemyPatrol : MonoBehaviour
 
 	private void Rotate()
 	{
-		Vector3 targetDirection = enemyPoints[currentPointIndex].position - transform.position;
-		Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+		Quaternion targetRotation;
+		if (enemyPoints.Length > 1)
+		{
+			Vector3 targetDirection = enemyPoints[currentPointIndex].position - transform.position;
+			targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+
+		}
+		else
+		{
+			targetRotation = enemyPoints[0].rotation;
+		}
 		float angleToRotate = Quaternion.Angle(transform.rotation, targetRotation);
 
-		float direction = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
-		direction = 1;
+		//float direction = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
 
-		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5f * angleToRotate * direction);
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5f * angleToRotate);
 	}
 
 	public void Die()
 	{
 		this.alive = false;
 		animator.SetTrigger("death1");
+		paradoxCauser.ResolveParadox();
 	}
 
 }

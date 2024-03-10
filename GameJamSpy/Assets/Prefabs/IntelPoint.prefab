@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4952386164737646327}
   - component: {fileID: 6432380250403104933}
   - component: {fileID: 8856804033550242139}
+  - component: {fileID: 5499787442399001520}
   m_Layer: 0
   m_Name: IntelPoint
   m_TagString: Untagged
@@ -120,3 +121,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: 0
   active: 1
+  text: Steal intel
+  availableForProtector: 0
+--- !u!114 &5499787442399001520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554372295224628182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecf81bc22ca4034ca764681369b17c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

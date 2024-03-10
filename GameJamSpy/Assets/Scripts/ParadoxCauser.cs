@@ -19,13 +19,13 @@ public class ParadoxCauser : MonoBehaviour, IResettable
 
 	}
 
-	public Paradox CauseParadox()
+	public Paradox CauseParadox(string name)
 	{
 		if (FinishArea.recording)
 		{
 			if (this.paradox == null)
 			{
-				Paradox p = new Paradox(this, TimeManager.elapsedTime, this.transform.position);
+				Paradox p = new Paradox(this, TimeManager.elapsedTime, this.transform.position, name);
 				Debug.Log(p.indicator);
 
 				this.paradox = p;
@@ -38,7 +38,7 @@ public class ParadoxCauser : MonoBehaviour, IResettable
 		{
 			if (!this.resolved)
 			{
-				ParadoxManager.GameOver();
+				ParadoxManager.GameOver("Time paradox: " + name);
 			}
 		}
 		return null;

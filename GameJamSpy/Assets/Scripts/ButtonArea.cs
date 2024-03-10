@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ButtonArea : MonoBehaviour, IResettable
 {
 	public bool highlight = false;
 	public bool active = true;
+
+	public string text = "interact";
 	MeshRenderer meshRenderer;
+	TextMeshProUGUI promptText;
+
+	public bool availableForProtector = true;
 	// Start is called before the first frame update
 	void Start()
 	{
+		promptText = ParadoxManager.i.interactPrompt.GetComponentsInChildren<TextMeshProUGUI>()[1];
+		ParadoxManager.i.interactPrompt.SetActive(false);
 		meshRenderer = GetComponent<MeshRenderer>();
+		this.highlight = false;
 	}
 
 	// Update is called once per frame
@@ -21,6 +30,11 @@ public class ButtonArea : MonoBehaviour, IResettable
 			if (Input.GetKeyUp(KeyCode.F))
 			{
 				this.SendMessage("ButtonPush");
+
+				this.highlight = false;
+				ParadoxManager.i.interactPrompt.SetActive(false);
+				promptText.text = text;
+
 				this.meshRenderer.enabled = false;
 				this.active = false;
 			}
@@ -30,8 +44,11 @@ public class ButtonArea : MonoBehaviour, IResettable
 	{
 		if (other.CompareTag("Player") && this.active)
 		{
+			if (other.gameObject == ParadoxManager.i.protector && !availableForProtector) return;
 			this.highlight = true;
 			ParadoxManager.i.interactPrompt.SetActive(true);
+			promptText.text = text;
+			
 		}
 	}
 	private void OnTriggerExit(Collider other)
@@ -40,10 +57,12 @@ public class ButtonArea : MonoBehaviour, IResettable
 		{
 			this.highlight = false;
 			ParadoxManager.i.interactPrompt.SetActive(false);
+			promptText.text = text;
 		}
 	}
 	public void Reset()
 	{
+		ParadoxManager.i.interactPrompt.SetActive(false);
 		this.meshRenderer.enabled = true;
 		this.highlight = false;
 		this.active = true;

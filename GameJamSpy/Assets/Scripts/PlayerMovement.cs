@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 			{
 				if (viewCone.directSight)
 				{
-					ParadoxManager.GameOver();
+					ParadoxManager.GameOver("You got spotted by your alternate self.");
 				}
 			}
 		}
@@ -68,7 +68,10 @@ public class PlayerMovement : MonoBehaviour
 			Vector3 animatorDir = (animationRot) * movementDir;
 			animator.SetFloat("moveX", animatorDir.x);
 			animator.SetFloat("moveY", animatorDir.z);
-			animator.SetBool("isRunning", Input.GetKey(KeyCode.LeftShift));
+			if (FinishArea.recording)
+			{
+				animator.SetBool("isRunning", Input.GetKey(KeyCode.LeftShift));
+			}
 
 			if (!FinishArea.recording)
 			{
@@ -77,6 +80,19 @@ public class PlayerMovement : MonoBehaviour
 					gunFX.gameObject.SetActive(true);
 					timeSinceGunshot = 0;
 					gunParticles.Emit(1);
+					animator.SetTrigger("shoot");
+					Ray shootRay = new Ray(transform.position, transform.rotation * Vector3.forward);
+					if (Physics.Raycast(shootRay, out RaycastHit hit, 10, LayerMask.GetMask("Enemy") + LayerMask.GetMask("Wall"), QueryTriggerInteraction.Collide))
+					{
+						Debug.Log("hit" + hit.transform.gameObject);
+						if (hit.transform.CompareTag("Enemy"))
+						{
+							Debug.Log("actually hit enemy");
+							EnemyPatrol enemy = hit.transform.GetComponent<EnemyPatrol>();
+							enemy.Die();
+						}
+					}
+
 					ParadoxManager.ParadoxEvent();
 				}
 				else

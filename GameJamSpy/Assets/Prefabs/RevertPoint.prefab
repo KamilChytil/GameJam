@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1281026356298608534}
   - component: {fileID: 7469302479462984710}
   - component: {fileID: 6435264284502854053}
+  - component: {fileID: 7014341221811869489}
   m_Layer: 0
   m_Name: RevertPoint
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,3 +121,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: 0
   active: 1
+  text: Activate Time Rift
+  availableForProtector: 0
+--- !u!114 &7014341221811869489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7379751250573207990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20b7eaa88aeed14a80bb94dfa57fe8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

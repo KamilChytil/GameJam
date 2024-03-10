@@ -27,7 +27,7 @@ public class Door : MonoBehaviour, IResettable
         {
             if (!this.open)
             {
-                this.paradoxCauser.CauseParadox();
+                this.paradoxCauser.CauseParadox("The agent tried to pass through a closed door.");
             }
         }
     }

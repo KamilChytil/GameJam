@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: 0
   active: 1
+  text: Open Doors
 --- !u!114 &4213293476898336098
 MonoBehaviour:
   m_ObjectHideFlags: 0

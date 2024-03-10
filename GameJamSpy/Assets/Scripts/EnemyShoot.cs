@@ -18,7 +18,7 @@ public class EnemyShoot : MonoBehaviour
         {
             playerLocation = other.transform;
             isPlayerInArea = true;
-            Debug.Log(timer + "timer");
+            //Debug.Log(timer + "timer");
         }
     }
 
