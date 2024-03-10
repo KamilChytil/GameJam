@@ -21,6 +21,10 @@ public class ParadoxManager : MonoBehaviour
 	public TextMeshProUGUI nextParadoxCounter;
 	public TextMeshProUGUI nextParadoxDescription;
 
+	public AudioClip calmMusic;
+	public AudioClip aggressiveMusic;
+	AudioSource audioSource;
+
 	public static bool intelDone = false;
 	public static bool timeRiftDone = false;
 
@@ -44,11 +48,13 @@ public class ParadoxManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		audioSource = GetComponent<AudioSource>();
 		Paradox.nextOrder = 0;
 		paradoxAmount = 0;
 		screenFlash = 0;
 		i = this;
 		shouldReset = true;
+		audioSource.clip = calmMusic;
 
 	}
 
@@ -137,8 +143,13 @@ public class ParadoxManager : MonoBehaviour
 	{
 		PlayerMovement pm = i.player.GetComponent<PlayerMovement>();
 		pm.passive = true;
-
 		i.protector.SetActive(true);
+		 float t = i.audioSource.time;
+		i.audioSource.clip = i.aggressiveMusic;
+		i.audioSource.time = t;
+		i.audioSource.volume = .8f;
+		i.audioSource.Play();
+		GameObject.Find("checkbox_intel").transform.parent.localScale = new Vector3();
 	}
 
 	public static void ResetAll()

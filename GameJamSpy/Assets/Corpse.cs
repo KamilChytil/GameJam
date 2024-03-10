@@ -39,6 +39,9 @@ public class Corpse : MonoBehaviour, IResettable
 		foreach (var mat in mr.materials)
 		{
 			mat.color = color;
+			mat.SetColor("Color", color);
+			mat.SetColor("_Color", color);
+			mat.SetColor("_BaseColor", color);
 		}
 	}
 }
