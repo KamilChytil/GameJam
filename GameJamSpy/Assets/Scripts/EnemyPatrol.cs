@@ -148,9 +148,9 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 	public void Reset()
 	{
 		Debug.Log("Reset Guard");
+		currentPointIndex = 0;
 		transform.position = enemyPoints[currentPointIndex].position;
 		alive = true;
-		currentPointIndex = 0;
 		alreadyShot = false;
 		aimingTime = 0;
 

@@ -45,13 +45,15 @@ public class ParadoxManager : MonoBehaviour
 
 	private void Awake()
 	{
-		Time.timeScale = 1;
+		//Time.timeScale = 1;
 		i = this;
 		ParadoxManager.resetList.Clear();
+		Application.targetFrameRate = 60;
 	}
 	// Start is called before the first frame update
 	void Start()
 	{
+		Paradox.list.Clear();
 		audioSource = GetComponent<AudioSource>();
 		Paradox.nextOrder = 0;
 		paradoxAmount = 0;
@@ -104,14 +106,14 @@ public class ParadoxManager : MonoBehaviour
 		i.loseUI.SetActive(true);
 		GameObject.Find("lose_text").GetComponent<TextMeshProUGUI>().text = reason;
 		TimeManager.running = false;
-		Time.timeScale = 0;
+		//Time.timeScale = 0;
 	}
 
 	public static void Win()
 	{
 		Debug.Log("You win!");
 		i.winUI.SetActive(true);
-		Time.timeScale = 0;
+		//Time.timeScale = 0;
 	}
 
 	public static void UpdateParadoxCounter()
@@ -150,7 +152,7 @@ public class ParadoxManager : MonoBehaviour
 		PlayerMovement pm = i.player.GetComponent<PlayerMovement>();
 		pm.passive = true;
 		i.protector.SetActive(true);
-		 float t = i.audioSource.time;
+		float t = i.audioSource.time;
 		i.audioSource.clip = i.aggressiveMusic;
 		i.audioSource.time = t;
 		i.audioSource.volume = .8f;
@@ -160,7 +162,7 @@ public class ParadoxManager : MonoBehaviour
 
 	public static void ResetAll()
 	{
-		Time.timeScale = 1;
+		//Time.timeScale = 1;
 		shouldReset = false;
 		nextParadoxIndex = 0;
 		TimeManager.running = true;
