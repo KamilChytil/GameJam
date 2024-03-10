@@ -7,7 +7,7 @@ public class EnemyShoot : MonoBehaviour
 
     public Transform playerLocation;
 
-    public bool isPLayerInArea = false;
+    public bool isPlayerInArea = false;
 
     private float timer;
 
@@ -16,8 +16,8 @@ public class EnemyShoot : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
-            isPLayerInArea = true;
+            playerLocation = other.transform;
+            isPlayerInArea = true;
             Debug.Log(timer + "timer");
         }
     }
@@ -27,7 +27,7 @@ public class EnemyShoot : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            isPLayerInArea = false;
+            isPlayerInArea = false;
             //Debug.Log("Player leave the trigger!");
         }
     }

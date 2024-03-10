@@ -5,30 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class FinishArea : MonoBehaviour
 {
-	public static int replayActive = 0;
+	public static bool recording = true;
 
 
 	private void Start()
 	{
-		
+		recording = true;
 	}
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
 			Debug.Log(Time.timeSinceLevelLoad);
-			if(replayActive == 0)
+			if(recording)
 			{
 				PlayerPositionRecorder.RecordPlayerPosition(other.transform);
-				PlayerPositionRecorder.SavePositionData();
+				PlayerPositionLoader.LoadData();
+				ResetEverything();
+				ParadoxManager.EndRecording();
 			}
-			setReplayActive(1);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			else
+			{
+				ParadoxManager.Win();
+			}
+			recording = false;
+			//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
-	public static void setReplayActive(int value)
+	private void ResetEverything()
 	{
-		replayActive = value;
-		PlayerPrefs.SetInt("replayActive", value);
+		TimeManager.elapsedTime = 0;
+		ParadoxManager.ResetAll();
 	}
 }

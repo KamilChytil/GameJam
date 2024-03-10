@@ -1,98 +1,124 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(ParadoxCauser))]
 public class EnemyPatrol : MonoBehaviour
 {
-    public float enemySpeed;
-    public float enemyWait;
-    public Transform[] enemyPoints;
-    private int currentPointIndex = 0;
-    public EnemyShoot enemyShoot;
+	ParadoxCauser paradoxCauser;
 
-    private float timeToWait = 0f;
+	public float enemySpeed;
+	public float enemyWait;
+	public Transform[] enemyPoints;
+	private int currentPointIndex = 0;
 
-    public bool isEnemyAlive = true;
+	ViewCone viewCone;
 
+	Animator animator;
+	ParticleSystem gunParticles;
 
-    void Start()
-    {
-        isEnemyAlive = true;
-        enemyShoot = GetComponent<EnemyShoot>();
-        Transform childTransform = transform.GetChild(1);
-        enemyShoot = childTransform.GetComponent<EnemyShoot>();
-    }
+	private float aimingTime = 0f;
 
-    void Update()
-    {
-        if(isEnemyAlive == true)
-        {
-            EnemyMoveToPoint();
+	public bool alive = true;
 
-        }
-        else 
-        {
-            Debug.Log("EnemyDead");
-
-        }
-    }
+	public bool alreadyShot = false;
 
 
-    private void ChangePoint()
-    {
-        currentPointIndex++;
+	void Start()
+	{
+		transform.position = enemyPoints[currentPointIndex].position;
+		alive = true;
+		viewCone = GetComponentInChildren<ViewCone>();
+		paradoxCauser = GetComponent<ParadoxCauser>();
+		animator = GetComponentInChildren<Animator>();
+		gunParticles = GetComponentInChildren<ParticleSystem>();
+	}
 
-        if(currentPointIndex == enemyPoints.Length)
-        {
-            currentPointIndex = 0;
-        }
+	void Update()
+	{
+		if (alive == true)
+		{
+			if (viewCone.directSight == true && aimingTime <= 1f)
+			{
+				animator.SetFloat("moveX", 1);
+				ShootingAtPlayer();
+			}
+			else
+			{
+				animator.SetFloat("moveX", 0);
+				if (!alreadyShot)
+				{
+					aimingTime = 0f;
+				}
 
-    }
+				Rotate();
 
+				transform.position = Vector3.MoveTowards(transform.position, enemyPoints[currentPointIndex].position, enemySpeed * Time.deltaTime);
+				if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < 1f)
+				{
+					ChangePoint();
+				}
 
-    private void PlayerEntrShootArea()
-    {
-        Vector3 targetDirection = enemyShoot.playerLocation.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
-        timeToWait += Time.deltaTime;
-        transform.position = transform.position;
+			}
 
-    }
+		}
+		else
+		{
+			Debug.Log("EnemyDead");
 
-    private void RotationEnemy()
-    {
-        Vector3 targetDirection = enemyPoints[currentPointIndex].position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        float angleToRotate = Quaternion.Angle(transform.rotation, targetRotation);
-
-        float direction = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5f * angleToRotate * direction);
-    }
-
-
-    private void EnemyMoveToPoint()
-    {
-
-        if(enemyShoot.isPLayerInArea == true && timeToWait <= 1f)
-        {
-            PlayerEntrShootArea();
-        }
-        else
-        {
-            enemyShoot.isPLayerInArea = false;
-            timeToWait = 0f;
-            RotationEnemy();
-            transform.position = Vector3.MoveTowards(transform.position, enemyPoints[currentPointIndex].position, enemySpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < 1f)
-            {
-                ChangePoint();
-            }
-
-        }
+		}
+	}
 
 
-    }
+	private void ChangePoint()
+	{
+		currentPointIndex++;
+
+		if (currentPointIndex == enemyPoints.Length)
+		{
+			currentPointIndex = 0;
+		}
+
+	}
+
+
+	private void ShootingAtPlayer()
+	{
+		aimingTime += Time.deltaTime;
+		if (viewCone.visiblePlayer == null) return;
+		Vector3 targetDirection = viewCone.visiblePlayer.position - transform.position;
+		Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+		if (!alreadyShot && aimingTime >= .5f)
+		{
+			animator.SetTrigger("shoot");
+			ParadoxManager.Paradox p = paradoxCauser.CauseParadox();
+			if (p != null)
+			{
+				p.indicator.transform.SetParent(transform, false);
+				p.indicator.transform.localPosition = new Vector3();
+			}
+			alreadyShot = true;
+			gunParticles.Emit(1);
+		}
+
+	}
+
+	private void Rotate()
+	{
+		Vector3 targetDirection = enemyPoints[currentPointIndex].position - transform.position;
+		Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+		float angleToRotate = Quaternion.Angle(transform.rotation, targetRotation);
+
+		float direction = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
+		direction = 1;
+
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5f * angleToRotate * direction);
+	}
+
+	public void Die()
+	{
+		this.alive = false;
+		animator.SetTrigger("death1");
+	}
 
 }

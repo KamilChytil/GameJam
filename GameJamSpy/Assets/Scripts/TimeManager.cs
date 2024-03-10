@@ -7,7 +7,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    public float elapsedTime = 0;
+    public static float elapsedTime = 0;
 
     // Start is called before the first frame update
     void Start()
