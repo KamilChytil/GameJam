@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 		controller = GetComponent<CharacterController>();
 		animator = GetComponentInChildren<Animator>();
 		gunParticles = GetComponentInChildren<ParticleSystem>();
+		cameraRoot = GameObject.Find("CameraRoot").transform;
+		lightRoot = GameObject.Find("LightRoot").transform;
 	}
 
 	// Update is called once per frame
