@@ -13,7 +13,7 @@ public class Corpse : MonoBehaviour, IResettable
 		animator = GetComponentInChildren<Animator>();
 		animator.SetTrigger("death1");
 		ParadoxManager.resetList.Add(this);
-		SetColor(Color.green);
+		SetColor(Color.red);
 	}
 
 	// Update is called once per frame

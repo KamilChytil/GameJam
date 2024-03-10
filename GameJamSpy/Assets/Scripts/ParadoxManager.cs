@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -111,8 +111,16 @@ public class ParadoxManager : MonoBehaviour
 
 	public static void Win()
 	{
-		Debug.Log("You win!");
+		int starCount = 5 - Mathf.Clamp((int)(TimeManager.elapsedTime / 30f), 0, 4);
+		string winString = " ";
+		for (int i = 0; i < starCount; i++)
+		{
+			winString += "+";
+		}
+		Debug.Log("You win! ");
 		i.winUI.SetActive(true);
+		i.winUI.GetComponentInChildren<TextMeshProUGUI>().text += winString;
+		TimeManager.running = false;
 		//Time.timeScale = 0;
 	}
 
