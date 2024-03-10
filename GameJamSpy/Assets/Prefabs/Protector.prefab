@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8b6986fb7b5494e86c839ad480f5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2.5
   cameraRoot: {fileID: 0}
   lightRoot: {fileID: 0}
   gunFX: {fileID: 2958333341338310775}

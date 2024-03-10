@@ -46,6 +46,7 @@ public class ParadoxCauser : MonoBehaviour, IResettable
 	public void ResolveParadox()
 	{
 		if (FinishArea.recording) return;
+		if (this.paradox == null) return;
 		this.paradox.resolved = true;
 		this.resolved = true;
 		Debug.Log("Paradox resolved");

@@ -127,11 +127,15 @@ MonoBehaviour:
   paradoxPrefab: {fileID: 578798190753078815, guid: 2400e5689a3a1d647ac621f358a8df17,
     type: 3}
   paradoxCounter: {fileID: 0}
+  paradoxIcon: {fileID: 0}
   interactPrompt: {fileID: 0}
   player: {fileID: 0}
   protector: {fileID: 0}
   winUI: {fileID: 0}
   loseUI: {fileID: 0}
+  corpse: {fileID: 6544937057713510356, guid: 45cdb0a5f0dfaf54ba8c65c1daabb8ef, type: 3}
+  nextParadoxCounter: {fileID: 0}
+  nextParadoxDescription: {fileID: 0}
   fullscreenMaterial: {fileID: 2100000, guid: a2023d74b52df7e46a392356dd7b323b, type: 2}
 --- !u!1 &5211019241545348369
 GameObject:

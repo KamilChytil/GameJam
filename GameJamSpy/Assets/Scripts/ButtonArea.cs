@@ -20,6 +20,7 @@ public class ButtonArea : MonoBehaviour, IResettable
 		ParadoxManager.i.interactPrompt.SetActive(false);
 		meshRenderer = GetComponent<MeshRenderer>();
 		this.highlight = false;
+		ParadoxManager.resetList.Add(this);
 	}
 
 	// Update is called once per frame

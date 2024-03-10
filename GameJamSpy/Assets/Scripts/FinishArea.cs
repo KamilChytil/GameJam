@@ -16,29 +16,28 @@ public class FinishArea : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			if (ParadoxManager.intelDone && ParadoxManager.timeRiftDone)
+			if (recording)
 			{
-
-				Debug.Log(Time.timeSinceLevelLoad);
-				if (recording)
+				if (ParadoxManager.intelDone && ParadoxManager.timeRiftDone)
 				{
+					recording = false;
 					PlayerPositionRecorder.RecordPlayerPosition(other.transform);
 					PlayerPositionLoader.LoadData();
-					ResetEverything();
 					ParadoxManager.EndRecording();
+					ResetEverything();
 				}
-				else
-				{
-					ParadoxManager.Win();
-				}
-				recording = false;
 			}
+			else if (other.GetComponent<PlayerMovement>().passive)
+			{
+				ParadoxManager.Win();
+			}
+
 			//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
 	private void ResetEverything()
 	{
-		TimeManager.elapsedTime = 0;
+
 		ParadoxManager.ResetAll();
 	}
 }

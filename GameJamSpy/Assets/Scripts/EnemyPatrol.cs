@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(ParadoxCauser))]
-public class EnemyPatrol : MonoBehaviour
+public class EnemyPatrol : MonoBehaviour, IResettable
 {
 	ParadoxCauser paradoxCauser;
 
@@ -25,7 +25,6 @@ public class EnemyPatrol : MonoBehaviour
 
 	void Start()
 	{
-		transform.position = enemyPoints[currentPointIndex].position;
 		alive = true;
 		viewCone = GetComponentInChildren<ViewCone>();
 		paradoxCauser = GetComponent<ParadoxCauser>();
@@ -35,6 +34,8 @@ public class EnemyPatrol : MonoBehaviour
 		{
 			enemyPoints = new Transform[] { transform };
 		}
+		transform.position = enemyPoints[currentPointIndex].position;
+		ParadoxManager.resetList.Add(this);
 	}
 
 	void Update()
@@ -102,6 +103,10 @@ public class EnemyPatrol : MonoBehaviour
 			ParadoxManager.Paradox p = paradoxCauser.CauseParadox("A guard was allowed to kill the agent.");
 			if (p != null)
 			{
+				Corpse corpse = GameObject.Instantiate(ParadoxManager.i.corpse).GetComponent<Corpse>();
+				corpse.paradox = p;
+				corpse.transform.position = viewCone.visiblePlayer.position;
+				corpse.transform.rotation = Quaternion.Euler(0, 180, 0) * this.transform.rotation;
 				p.indicator.transform.SetParent(transform, false);
 				p.indicator.transform.localPosition = new Vector3();
 			}
@@ -133,9 +138,22 @@ public class EnemyPatrol : MonoBehaviour
 
 	public void Die()
 	{
-		this.alive = false;
-		animator.SetTrigger("death1");
-		paradoxCauser.ResolveParadox();
+		if (this.alive)
+		{
+			this.alive = false;
+			animator.SetTrigger("death1");
+			paradoxCauser.ResolveParadox();
+		}
+	}
+	public void Reset()
+	{
+		Debug.Log("Reset Guard");
+		transform.position = enemyPoints[currentPointIndex].position;
+		alive = true;
+		currentPointIndex = 0;
+		alreadyShot = false;
+		aimingTime = 0;
+
 	}
 
 }

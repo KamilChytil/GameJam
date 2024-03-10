@@ -58,14 +58,6 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: NewEvent
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: cec3a8f522d34e9498de870f3d5294d3,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.00075946224
         functionName: Oneshot
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: cec3a8f522d34e9498de870f3d5294d3,
