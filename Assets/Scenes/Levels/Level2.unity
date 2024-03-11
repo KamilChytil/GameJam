@@ -247,7 +247,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb6c8c40b5e4414c961f54dd1f9fd0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b463c15939ca5749a3a754eb7668d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &319675331
@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb6c8c40b5e4414c961f54dd1f9fd0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b463c15939ca5749a3a754eb7668d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1433025653
@@ -1903,6 +1903,16 @@ PrefabInstance:
       propertyPath: paradoxCounter
       value: 
       objectReference: {fileID: 1367675018}
+    - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
+        type: 3}
+      propertyPath: playerInstance
+      value: 
+      objectReference: {fileID: 1605900150}
+    - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
+        type: 3}
+      propertyPath: protectorInstance
+      value: 
+      objectReference: {fileID: 779789785}
     - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
         type: 3}
       propertyPath: nextParadoxCounter

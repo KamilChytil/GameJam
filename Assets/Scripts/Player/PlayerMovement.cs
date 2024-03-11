@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 		cameraRoot = GameObject.Find("CameraRoot").transform;
 		lightRoot = GameObject.Find("LightRoot").transform;
 		gunFlash = transform.Find("Gun Flash");
-		if(gunFlash != null)gunFlash.gameObject.SetActive(false);
+		if (gunFlash != null) gunFlash.gameObject.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -55,18 +55,19 @@ public class PlayerMovement : MonoBehaviour
 
 			if (Physics.Raycast(r, out RaycastHit hitInfo, 100, LayerMask.GetMask("Ground")))
 			{
-				//  transform.rotation = Quaternion.LookRotation(hitInfo.point - transform.position, Vector3.up);
 				Vector3 mouseDiff = hitInfo.point - transform.position;
-				//mouseDiff -= cameraRoot.position - transform.position;
-				transform.eulerAngles = new Vector3(0, Quaternion.LookRotation(mouseDiff, Vector3.up).eulerAngles.y, 0);
+				float angle = Vector3.SignedAngle(Vector3.forward, mouseDiff,Vector3.up);
 
+				transform.eulerAngles = new Vector3(0, angle, 0);
 
 				mouseDiff.x *= -1;
-				animationRot = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(mouseDiff, Vector3.up).eulerAngles.y, 0));
+				angle = Vector3.SignedAngle(Vector3.forward, mouseDiff, Vector3.up);
+				animationRot = Quaternion.Euler(new Vector3(0, angle, 0));
 			}
 			Vector3 movementDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 			float runningMultiplier = Input.GetKey(KeyCode.LeftShift) ? 2 : 1;
 			controller.Move(movementDir * speed * runningMultiplier * Time.deltaTime);
+			transform.position.Set(transform.position.x, 0, transform.position.y);
 
 			//Quaternion r90d = Quaternion.Euler(0, -90, 0);
 			Vector3 animatorDir = (animationRot) * movementDir;
@@ -86,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 					gunParticles.Emit(1);
 					animator.SetTrigger("shoot");
 					Ray shootRay = new Ray(transform.position, transform.rotation * Vector3.forward);
-					if (Physics.Raycast(shootRay, out RaycastHit hit, 10, LayerMask.GetMask("Enemy") + LayerMask.GetMask("Wall"), QueryTriggerInteraction.Collide))
+					if (Physics.Raycast(shootRay, out RaycastHit hit, 10, LayerMask.GetMask("Enemy") + LayerMask.GetMask("Walls"), QueryTriggerInteraction.Collide))
 					{
 						Debug.Log("hit" + hit.transform.gameObject);
 						if (hit.transform.CompareTag("Enemy"))

@@ -2591,6 +2591,7 @@ GameObject:
   - component: {fileID: 3613887907006243518}
   - component: {fileID: 484091303847538510}
   - component: {fileID: 7595301916771837645}
+  - component: {fileID: 5947940608150955177}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2699,6 +2700,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618a501f91328b84c88b789e08b2e57b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5947940608150955177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8854032572546601203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd641a337688390469f4201e1c0ee0a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winUI: {fileID: 8683956694655925228}
+  loseUI: {fileID: 5565835192538632713}
+  paradoxCounter: {fileID: 7426426527560536641}
+  paradoxIcon: {fileID: 3506065843645103387}
+  interactPrompt: {fileID: 6215793342794227064}
+  timerText: {fileID: 8188621816888691079}
+  nextParadoxCounter: {fileID: 1044440232900491874}
+  nextParadoxDescription: {fileID: 8769781946733561455}
 --- !u!1 &9068936887274299283
 GameObject:
   m_ObjectHideFlags: 0

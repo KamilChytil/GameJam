@@ -41,7 +41,7 @@ public class ParadoxManager : MonoBehaviour
 	{
 		//Time.timeScale = 1;
 		i = this;
-		ParadoxManager.resetList.Clear();
+		resetList.Clear();
 		Application.targetFrameRate = 60;
 	}
 	// Start is called before the first frame update
@@ -169,8 +169,8 @@ public class ParadoxManager : MonoBehaviour
 		nextParadoxIndex = 0;
 		TimeManager.running = true;
 		TimeManager.elapsedTime = 0;
-		intelDone = false;
-		timeRiftDone = false;
+		intelDone = true;
+		timeRiftDone = true;
 		UIReference.i.loseUI.SetActive(false);
 		UIReference.i.winUI.SetActive(false);
 		paradoxAmount = Paradox.nextOrder;

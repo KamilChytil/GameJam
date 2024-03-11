@@ -42,6 +42,7 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 	{
 		if (alive == true)
 		{
+			transform.position.Set(transform.position.x, 0, transform.position.y);
 			if (viewCone.directSight == true && aimingTime <= 1.5f)
 			{
 				animator.SetBool("isWalking", false);
@@ -81,7 +82,7 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 	{
 		currentPointIndex++;
 
-		if (currentPointIndex == enemyPoints.Length)
+		if (currentPointIndex >= enemyPoints.Length)
 		{
 			currentPointIndex = 0;
 		}
@@ -94,11 +95,12 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 		aimingTime += Time.deltaTime;
 		if (viewCone.visiblePlayer == null) return;
 		Vector3 targetDirection = viewCone.visiblePlayer.position - transform.position;
-		Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+		float targetAngle = Vector3.SignedAngle(Vector3.forward, targetDirection, Vector3.up);
+		Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5);
 		if (!alreadyShot && aimingTime >= .5f)
 		{
-			transform.rotation = targetRotation;
+			transform.eulerAngles = new Vector3(0, targetAngle, 0);
 			animator.SetTrigger("Shoot");
 			Paradox p = paradoxCauser.CauseParadox("A guard was allowed to kill the agent.");
 			if (p != null)
@@ -118,22 +120,17 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 
 	private void Rotate()
 	{
-		Quaternion targetRotation;
+		Quaternion targetRotation = enemyPoints[currentPointIndex].rotation;
 		if (enemyPoints.Length > 1)
 		{
 			Vector3 targetDirection = enemyPoints[currentPointIndex].position - transform.position;
-			targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+			if (targetDirection.sqrMagnitude > .1f)
+				targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
-		}
-		else
-		{
-			targetRotation = enemyPoints[0].rotation;
 		}
 		float angleToRotate = Quaternion.Angle(transform.rotation, targetRotation);
-
-		//float direction = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
-
-		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5f * angleToRotate);
+		if (angleToRotate > 0)
+			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 2f * 180 / angleToRotate);
 	}
 
 	public void Die()

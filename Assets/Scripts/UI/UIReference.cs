@@ -14,7 +14,7 @@ public class UIReference : MonoBehaviour
 	public TextMeshProUGUI timerText;
 	public TextMeshProUGUI nextParadoxCounter;
 	public TextMeshProUGUI nextParadoxDescription;
-	private void Start()
+	private void Awake()
 	{
 		i = this;
 	}
