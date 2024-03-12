@@ -122,7 +122,7 @@ public class ParadoxManager : MonoBehaviour
 		if (PlayerMovement.kills == 0) rating += 1;
 		else if (PlayerMovement.kills >= 4) rating -= 1;
 
-		rating = Mathf.Clamp(rating - (int)((TimeManager.elapsedTime - i.expectedMissionTime) / 20f), 0, 7);
+		rating = Mathf.Clamp(rating - (int)(Mathf.Max(0, TimeManager.elapsedTime - i.expectedMissionTime) / 20f), 0, 7);
 
 		string[] ratingChars = { "F", "E", "C", "D", "B", "A", "S", "S+" };
 		string ratingString = ratingChars[rating];
