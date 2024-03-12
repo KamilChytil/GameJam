@@ -2796,7 +2796,7 @@ PrefabInstance:
     - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
         type: 3}
       propertyPath: expectedMissionTime
-      value: 45
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
         type: 3}

@@ -33,19 +33,17 @@ public class PlayerPositionLoader : MonoBehaviour
 			if (currentIndex < positions.Length)
 			{
 				timer += Time.deltaTime;
-				if (timer >= PlayerPositionRecorder.recordingInterval)
+				while (timer >= PlayerPositionRecorder.recordingInterval)
 				{
 					currentIndex++;
 
 					timer -= PlayerPositionRecorder.recordingInterval;
 				}
-				else
-				{
-					int nextIndex = Mathf.Min(currentIndex + 1, positions.Length - 1);
-					transform.position = Vector3.Lerp(positions[currentIndex], positions[nextIndex], timer / PlayerPositionRecorder.recordingInterval);
-					moveDir = (positions[nextIndex] - positions[currentIndex]).normalized;
-					transform.rotation = Quaternion.Lerp(rotations[currentIndex], rotations[nextIndex], timer / PlayerPositionRecorder.recordingInterval);
-				}
+				int nextIndex = Mathf.Min(currentIndex + 1, positions.Length - 1);
+				transform.position = Vector3.Lerp(positions[currentIndex], positions[nextIndex], timer / PlayerPositionRecorder.recordingInterval);
+				moveDir = (positions[nextIndex] - positions[currentIndex]).normalized;
+				transform.rotation = Quaternion.Lerp(rotations[currentIndex], rotations[nextIndex], timer / PlayerPositionRecorder.recordingInterval);
+
 			}
 		}
 

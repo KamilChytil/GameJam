@@ -1811,6 +1811,11 @@ PrefabInstance:
       objectReference: {fileID: 1724254150}
     - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
         type: 3}
+      propertyPath: expectedMissionTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
+        type: 3}
       propertyPath: nextParadoxDescription
       value: 
       objectReference: {fileID: 914947690}

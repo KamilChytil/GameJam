@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(!TimeManager.running) return;
+		if (!TimeManager.running) return;
 		if (passive)
 		{
 			Vector3 dir = PlayerPositionLoader.moveDir;
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 			if (Physics.Raycast(r, out RaycastHit hitInfo, 100, LayerMask.GetMask("Ground")))
 			{
 				Vector3 mouseDiff = hitInfo.point - transform.position;
-				float angle = Vector3.SignedAngle(Vector3.forward, mouseDiff,Vector3.up);
+				float angle = Vector3.SignedAngle(Vector3.forward, mouseDiff, Vector3.up);
 
 				transform.eulerAngles = new Vector3(0, angle, 0);
 
@@ -109,6 +109,14 @@ public class PlayerMovement : MonoBehaviour
 					timeSinceGunshot += Time.deltaTime;
 					if (timeSinceGunshot >= .1f)
 						gunFlash.gameObject.SetActive(false);
+				}
+				if (Input.GetKeyDown(KeyCode.Space))
+				{
+					Time.timeScale = 4;
+				}
+				if (Input.GetKeyUp(KeyCode.Space))
+				{
+					Time.timeScale = 1;
 				}
 			}
 

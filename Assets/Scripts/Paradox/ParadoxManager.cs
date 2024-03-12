@@ -90,7 +90,7 @@ public class ParadoxManager : MonoBehaviour
 			{
 				UIReference.i.nextParadoxCounter.text = "All paradoxes resolved!";
 				UIReference.i.nextParadoxCounter.color = Color.green;
-				UIReference.i.nextParadoxDescription.text = "Don't get spotted by the agent and they will safely finish the mission.";
+				UIReference.i.nextParadoxDescription.text = "Don't get spotted by the agent and they will safely finish the mission.\nYou can press [SPACE] to fast-forward.";
 				UIReference.i.nextParadoxDescription.color = Color.green;
 			}
 		}
@@ -102,12 +102,13 @@ public class ParadoxManager : MonoBehaviour
 		UIReference.i.loseUI.SetActive(true);
 		UIReference.i.loseUI.transform.Find("lose_reason").GetComponent<TextMeshProUGUI>().text = reason;
 		TimeManager.running = false;
-		//Time.timeScale = 0;
+		Time.timeScale = 1;
 	}
 
 	public static void Win()
 	{
 		TimeManager.running = false;
+		Time.timeScale = 1;
 
 		Debug.Log("You win! ");
 
