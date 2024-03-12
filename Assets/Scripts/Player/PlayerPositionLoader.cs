@@ -27,8 +27,7 @@ public class PlayerPositionLoader : MonoBehaviour
 
 	private void Update()
 	{
-
-		if (!FinishArea.recording)
+		if (TimeManager.running && !FinishArea.recording)
 		{
 
 			if (currentIndex < positions.Length)

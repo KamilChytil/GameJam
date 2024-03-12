@@ -22,6 +22,8 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 
 	public bool alreadyShot = false;
 
+	float waitingTime = 0f;
+
 
 	void Start()
 	{
@@ -40,6 +42,7 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 
 	void Update()
 	{
+		if (!TimeManager.running) return;
 		if (alive == true)
 		{
 			transform.position.Set(transform.position.x, 0, transform.position.y);
@@ -54,16 +57,21 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 				{
 					aimingTime = 0f;
 				}
-
-				Rotate();
+				if (waitingTime <= 0f)
+					Rotate();
 
 				if (enemyPoints.Length > 1)
 				{
-					animator.SetBool("isWalking", true);
+					animator.SetBool("isWalking", waitingTime <= 0f);
 					transform.position = Vector3.MoveTowards(transform.position, enemyPoints[currentPointIndex].position, enemySpeed * Time.deltaTime);
-					if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < 1f)
+					if (Vector3.Distance(transform.position, enemyPoints[currentPointIndex].position) < .2f)
 					{
-						ChangePoint();
+						waitingTime += Time.deltaTime;
+						if (waitingTime > enemyWait)
+						{
+							waitingTime = 0f;
+							ChangePoint();
+						}
 					}
 				}
 
@@ -102,7 +110,9 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 		{
 			transform.eulerAngles = new Vector3(0, targetAngle, 0);
 			animator.SetTrigger("Shoot");
-			Paradox p = paradoxCauser.CauseParadox("A guard was allowed to kill the agent.");
+			alreadyShot = true;
+			gunParticles.Emit(1);
+			Paradox p = paradoxCauser.CauseParadox("A guard was allowed to kill the agent.", true);
 			if (p != null)
 			{
 				Corpse corpse = GameObject.Instantiate(ParadoxManager.i.corpsePrefab).GetComponent<Corpse>();
@@ -112,8 +122,6 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 				p.indicator.transform.SetParent(transform, false);
 				p.indicator.transform.localPosition = new Vector3();
 			}
-			alreadyShot = true;
-			gunParticles.Emit(1);
 		}
 
 	}
@@ -130,7 +138,9 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 		}
 		float angleToRotate = Quaternion.Angle(transform.rotation, targetRotation);
 		if (angleToRotate > 0)
-			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 2f * 180 / angleToRotate);
+		{
+			transform.eulerAngles = new Vector3(0, Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 2f * 180 / angleToRotate).eulerAngles.y, 0);
+		}
 	}
 
 	public void Die()

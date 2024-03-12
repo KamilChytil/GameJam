@@ -527,7 +527,7 @@ PrefabInstance:
     - target: {fileID: 1690603397719429890, guid: b4a1b25fed653c242a60ac780773b215,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.133
+      value: 0.513
       objectReference: {fileID: 0}
     - target: {fileID: 1690603397719429890, guid: b4a1b25fed653c242a60ac780773b215,
         type: 3}
@@ -563,6 +563,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503072041707532088, guid: b4a1b25fed653c242a60ac780773b215,
+        type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 447
       objectReference: {fileID: 0}
     - target: {fileID: 8614194313665298552, guid: b4a1b25fed653c242a60ac780773b215,
         type: 3}

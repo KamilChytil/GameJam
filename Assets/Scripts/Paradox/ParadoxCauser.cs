@@ -18,7 +18,7 @@ public class ParadoxCauser : MonoBehaviour, IResettable
 
 	}
 
-	public Paradox CauseParadox(string name)
+	public Paradox CauseParadox(string name,bool force = false)
 	{
 		if (FinishArea.recording)
 		{
@@ -33,7 +33,7 @@ public class ParadoxCauser : MonoBehaviour, IResettable
 				return p;
 			}
 		}
-		else if (this.paradox != null)
+		else if (this.paradox != null || force)
 		{
 			if (!this.resolved)
 			{

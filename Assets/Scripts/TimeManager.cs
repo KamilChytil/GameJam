@@ -25,4 +25,8 @@ public class TimeManager : MonoBehaviour
 			UIReference.i.timerText.text = TimeSpan.FromSeconds(elapsedTime).ToString(@"mm\:ss\.ff");
 		}
 	}
+	public static string currentTimeString()
+	{
+		return TimeSpan.FromSeconds(elapsedTime).ToString(@"mm\:ss\.ff");
+	}
 }

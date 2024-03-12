@@ -45,11 +45,11 @@ public class InteractionZone : MonoBehaviour, IResettable
 	{
 		if (other.CompareTag("Player") && this.active)
 		{
-			if (other.gameObject == ParadoxManager.i.protectorInstance && !availableForProtector) return;
+			if (!FinishArea.recording && !availableForProtector) return;
 			this.highlight = true;
 			UIReference.i.interactPrompt.SetActive(true);
 			promptText.text = text;
-			
+
 		}
 	}
 	private void OnTriggerExit(Collider other)

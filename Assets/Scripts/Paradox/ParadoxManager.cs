@@ -36,10 +36,12 @@ public class ParadoxManager : MonoBehaviour
 
 	public static float lastTime = 0;
 
+	public float expectedMissionTime = 30;
+
 
 	private void Awake()
 	{
-		//Time.timeScale = 1;
+		Time.timeScale = 1;
 		i = this;
 		resetList.Clear();
 		Application.targetFrameRate = 60;
@@ -75,7 +77,7 @@ public class ParadoxManager : MonoBehaviour
 				UIReference.i.nextParadoxCounter.color = Color.red;
 				UIReference.i.nextParadoxDescription.text = nextParadox.name;
 				UIReference.i.nextParadoxDescription.color = Color.red;
-				if (nextParadox.time <= TimeManager.elapsedTime)
+				if (TimeManager.elapsedTime >= nextParadox.time + .1f)
 				{
 					if (!nextParadox.resolved)
 					{
@@ -98,23 +100,46 @@ public class ParadoxManager : MonoBehaviour
 	{
 		Debug.Log("Game over!");
 		UIReference.i.loseUI.SetActive(true);
-		GameObject.Find("lose_text").GetComponent<TextMeshProUGUI>().text = reason;
+		UIReference.i.loseUI.transform.Find("lose_reason").GetComponent<TextMeshProUGUI>().text = reason;
 		TimeManager.running = false;
 		//Time.timeScale = 0;
 	}
 
 	public static void Win()
 	{
-		int starCount = 5 - Mathf.Clamp((int)(TimeManager.elapsedTime / 30f), 0, 4);
-		string winString = " ";
-		for (int i = 0; i < starCount; i++)
-		{
-			winString += "+";
-		}
-		Debug.Log("You win! ");
-		UIReference.i.winUI.SetActive(true);
-		UIReference.i.winUI.GetComponentInChildren<TextMeshProUGUI>().text += winString;
 		TimeManager.running = false;
+
+		Debug.Log("You win! ");
+
+		UIReference.i.winUI.SetActive(true);
+
+		UIReference.i.winUI.transform.Find("win_timer").GetComponent<TextMeshProUGUI>().text = "Time: " + TimeManager.currentTimeString();
+
+		int rating = 5;
+
+		if (Paradox.nextOrder == 0) rating += 1;
+		if (PlayerMovement.kills == 0) rating += 1;
+		else if (PlayerMovement.kills >= 4) rating -= 1;
+
+		rating = Mathf.Clamp(rating - (int)((TimeManager.elapsedTime - i.expectedMissionTime) / 20f), 0, 7);
+
+		string[] ratingChars = { "F", "E", "C", "D", "B", "A", "S", "S+" };
+		string ratingString = ratingChars[rating];
+
+		if (Paradox.nextOrder == 0) ratingString += " (no paradoxes)";
+		if (PlayerMovement.kills == 0) ratingString += " (no kills)";
+
+		Color ratingColor = Color.green;
+		if (rating <= 3) ratingColor = Color.yellow;
+		if (rating <= 1) ratingColor = Color.red;
+		if (rating >= 7) ratingColor = Color.magenta;
+
+
+		TextMeshProUGUI ratingText = UIReference.i.winUI.transform.Find("win_rating").GetComponent<TextMeshProUGUI>();
+
+		ratingText.text = ratingString;
+		ratingText.color = ratingColor;
+
 		//Time.timeScale = 0;
 	}
 
@@ -157,20 +182,20 @@ public class ParadoxManager : MonoBehaviour
 		float t = i.audioSource.time;
 		i.audioSource.clip = i.aggressiveMusic;
 		i.audioSource.time = t;
-		i.audioSource.volume = .8f;
 		i.audioSource.Play();
 		GameObject.Find("checkbox_intel").transform.parent.localScale = new Vector3();
 	}
 
 	public static void ResetAll()
 	{
-		//Time.timeScale = 1;
+		PlayerMovement.kills = 0;
+		Time.timeScale = 1;
 		shouldReset = false;
 		nextParadoxIndex = 0;
 		TimeManager.running = true;
 		TimeManager.elapsedTime = 0;
-		intelDone = true;
-		timeRiftDone = true;
+		intelDone = false;
+		timeRiftDone = false;
 		UIReference.i.loseUI.SetActive(false);
 		UIReference.i.winUI.SetActive(false);
 		paradoxAmount = Paradox.nextOrder;
@@ -190,6 +215,7 @@ public class ParadoxManager : MonoBehaviour
 		}
 		else
 		{
+			i.protectorInstance.SetActive(false);
 			UIReference.i.nextParadoxCounter.transform.parent.gameObject.SetActive(false);
 		}
 	}

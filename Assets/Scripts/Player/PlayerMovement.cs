@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
 	ViewCone viewCone;
 
+	public static int kills = 0;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(!TimeManager.running) return;
 		if (passive)
 		{
 			Vector3 dir = PlayerPositionLoader.moveDir;
@@ -95,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 							Debug.Log("actually hit enemy");
 							EnemyPatrol enemy = hit.transform.GetComponent<EnemyPatrol>();
 							enemy.Die();
+							kills++;
 						}
 					}
 

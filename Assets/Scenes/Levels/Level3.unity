@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 2045820818618818976, guid: 6153975c47a2f6045a88bec62b08c6d2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04
+      value: 0.043
       objectReference: {fileID: 0}
     - target: {fileID: 2045820818618818976, guid: 6153975c47a2f6045a88bec62b08c6d2,
         type: 3}
@@ -537,7 +537,7 @@ PrefabInstance:
     - target: {fileID: 2657384612095688895, guid: be421b8578393b74ca23a8ae85514351,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -566,7 +566,7 @@ PrefabInstance:
     - target: {fileID: 639856990532506878, guid: 7c8ec5f577652604384ce7506d464585,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.007
       objectReference: {fileID: 0}
     - target: {fileID: 639856990532506878, guid: 7c8ec5f577652604384ce7506d464585,
         type: 3}
@@ -896,6 +896,21 @@ PrefabInstance:
       propertyPath: doors.Array.data[1]
       value: 
       objectReference: {fileID: 1707021841}
+    - target: {fileID: 4409135736669151934, guid: 91c387404162a094d81ff240e09f6bba,
+        type: 3}
+      propertyPath: doors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409135736669151934, guid: 91c387404162a094d81ff240e09f6bba,
+        type: 3}
+      propertyPath: doors.Array.data[0]
+      value: 
+      objectReference: {fileID: 1303609448}
+    - target: {fileID: 4409135736669151934, guid: 91c387404162a094d81ff240e09f6bba,
+        type: 3}
+      propertyPath: doors.Array.data[1]
+      value: 
+      objectReference: {fileID: 1707021842}
     - target: {fileID: 8884605738962868119, guid: 91c387404162a094d81ff240e09f6bba,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1085,6 +1100,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b463c15939ca5749a3a754eb7668d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1303609448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7543836097840409222, guid: 130301c845988b847ac55258181867d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1303609446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bfdc0674102694d8ed7953daa0f786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1343646403
@@ -1381,6 +1408,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b463c15939ca5749a3a754eb7668d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1707021842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7543836097840409222, guid: 130301c845988b847ac55258181867d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1707021840}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bfdc0674102694d8ed7953daa0f786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1724254150 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1044440232900491874, guid: 48fd594c9a133ba4b92fca3d9788ad92,
@@ -1476,12 +1515,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e771ff93bd6cfb849a3fc2dc064a2438, type: 3}
---- !u!1 &2042495846 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8683956694655925228, guid: 48fd594c9a133ba4b92fca3d9788ad92,
-    type: 3}
-  m_PrefabInstance: {fileID: 6460218466738655263}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2124759106 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7044513895909625337, guid: 5b628b20074c50e44b3d7f3004eb2567,
@@ -1730,7 +1763,7 @@ PrefabInstance:
         type: 3}
       propertyPath: winUI
       value: 
-      objectReference: {fileID: 2042495846}
+      objectReference: {fileID: 0}
     - target: {fileID: 5825856608917382940, guid: 41ec93cc20d805f4a8a1a00ed2286f97,
         type: 3}
       propertyPath: loseUI

@@ -27,6 +27,8 @@ public class DoorOpener : MonoBehaviour
 		}
 	}
 }
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(DoorOpener))]
 class DoorOpenerEditor : Editor
 {
@@ -42,13 +44,21 @@ class DoorOpenerEditor : Editor
 		DoorOpener doorOpener = (DoorOpener)target;
 		if (PrefabUtility.IsPartOfPrefabInstance(doorOpener))
 		{
-			if (GUILayout.Button("Assign all doors in scene",GUILayout.MinHeight(30)))
+			if (GUILayout.Button("Assign all doors in scene", GUILayout.MinHeight(30)))
 			{
-				doorOpener.doors = (Door[])FindObjectsOfType(typeof(Door));
-				serializedObject.Update();
+				Door[] doors = (Door[])FindObjectsOfType(typeof(Door));
+				m_Property.ClearArray();
+				for (int x = 0; x < doors.Length; x++)
+				{
+					m_Property.InsertArrayElementAtIndex(x);
+					SerializedProperty property = m_Property.GetArrayElementAtIndex(x);
+					property.objectReferenceValue = doors[x];
+				}
+				//serializedObject.Update();
 			}
 		}
 		EditorGUILayout.PropertyField(m_Property, new GUIContent("Doors"), true);
 		serializedObject.ApplyModifiedProperties();
 	}
 }
+#endif

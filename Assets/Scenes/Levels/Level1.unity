@@ -1438,6 +1438,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Protector
       objectReference: {fileID: 0}
+    - target: {fileID: 2657384612095688895, guid: be421b8578393b74ca23a8ae85514351,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7249859125714309154, guid: be421b8578393b74ca23a8ae85514351,
         type: 3}
       propertyPath: lightRoot
@@ -1773,6 +1778,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 656766755017069847, guid: 48fd594c9a133ba4b92fca3d9788ad92,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3411454722877728419, guid: 48fd594c9a133ba4b92fca3d9788ad92,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1944,18 +1954,18 @@ PrefabInstance:
     - target: {fileID: 4409135736669151934, guid: 91c387404162a094d81ff240e09f6bba,
         type: 3}
       propertyPath: doors.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4409135736669151934, guid: 91c387404162a094d81ff240e09f6bba,
         type: 3}
       propertyPath: doors.Array.data[0]
       value: 
-      objectReference: {fileID: 2187667736510028177}
+      objectReference: {fileID: 2111555869}
     - target: {fileID: 4409135736669151934, guid: 91c387404162a094d81ff240e09f6bba,
         type: 3}
       propertyPath: doors.Array.data[1]
       value: 
-      objectReference: {fileID: 2111555869}
+      objectReference: {fileID: 2187667736510028177}
     - target: {fileID: 8884605738962868119, guid: 91c387404162a094d81ff240e09f6bba,
         type: 3}
       propertyPath: m_LocalPosition.x
