@@ -133,6 +133,7 @@ MonoBehaviour:
   calmMusic: {fileID: 8300000, guid: 378cc6c82ab742b4ca06b01fb4382ba1, type: 3}
   aggressiveMusic: {fileID: 8300000, guid: 59e7b2a1cff5042439802126d0c34ce8, type: 3}
   fullscreenMaterial: {fileID: 2100000, guid: a2023d74b52df7e46a392356dd7b323b, type: 2}
+  expectedMissionTime: 30
 --- !u!82 &2475678443311374006
 AudioSource:
   m_ObjectHideFlags: 0
@@ -145,7 +146,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 378cc6c82ab742b4ca06b01fb4382ba1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.435
+  m_Volume: 0.178
   m_Pitch: 1
   Loop: 1
   Mute: 0
