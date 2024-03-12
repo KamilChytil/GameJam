@@ -2199,7 +2199,7 @@ PrefabInstance:
     - target: {fileID: 8339423976286558166, guid: e771ff93bd6cfb849a3fc2dc064a2438,
         type: 3}
       propertyPath: enemyPoints.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8339423976286558166, guid: e771ff93bd6cfb849a3fc2dc064a2438,
         type: 3}
@@ -2226,6 +2226,26 @@ PrefabInstance:
       propertyPath: enemyPoints.Array.data[4]
       value: 
       objectReference: {fileID: 1991979485}
+    - target: {fileID: 8339423976286558166, guid: e771ff93bd6cfb849a3fc2dc064a2438,
+        type: 3}
+      propertyPath: enemyPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 1272569567}
+    - target: {fileID: 8339423976286558166, guid: e771ff93bd6cfb849a3fc2dc064a2438,
+        type: 3}
+      propertyPath: enemyPoints.Array.data[6]
+      value: 
+      objectReference: {fileID: 1724141606}
+    - target: {fileID: 8339423976286558166, guid: e771ff93bd6cfb849a3fc2dc064a2438,
+        type: 3}
+      propertyPath: enemyPoints.Array.data[7]
+      value: 
+      objectReference: {fileID: 1582274994}
+    - target: {fileID: 8339423976286558166, guid: e771ff93bd6cfb849a3fc2dc064a2438,
+        type: 3}
+      propertyPath: enemyPoints.Array.data[8]
+      value: 
+      objectReference: {fileID: 526693802}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

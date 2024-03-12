@@ -112,7 +112,8 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 			animator.SetTrigger("Shoot");
 			alreadyShot = true;
 			gunParticles.Emit(1);
-			Paradox p = paradoxCauser.CauseParadox("A guard was allowed to kill the agent.", true);
+			PlayerMovement playerMovement = viewCone.visiblePlayer.GetComponent<PlayerMovement>();
+			Paradox p = paradoxCauser.CauseParadox("A guard was allowed to kill the agent.", (!playerMovement.passive && !FinishArea.recording));
 			if (p != null)
 			{
 				Corpse corpse = GameObject.Instantiate(ParadoxManager.i.corpsePrefab).GetComponent<Corpse>();
