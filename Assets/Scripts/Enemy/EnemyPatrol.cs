@@ -18,7 +18,7 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 
 	private float aimingTime = 0f;
 
-	public bool alive = true;
+	public bool isGuardAlive = true;
 
 	public bool alreadyShot = false;
 
@@ -27,7 +27,7 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 
 	void Start()
 	{
-		alive = true;
+		isGuardAlive = true;
 		viewCone = GetComponentInChildren<ViewCone>();
 		paradoxCauser = GetComponent<ParadoxCauser>();
 		animator = GetComponentInChildren<Animator>();
@@ -43,7 +43,7 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 	void Update()
 	{
 		if (!TimeManager.running) return;
-		if (alive == true)
+		if (isGuardAlive == true)
 		{
 			transform.position.Set(transform.position.x, 0, transform.position.y);
 			if (viewCone.directSight == true && aimingTime <= 1.5f)
@@ -146,9 +146,9 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 
 	public void Die()
 	{
-		if (this.alive)
+		if (this.isGuardAlive)
 		{
-			this.alive = false;
+			this.isGuardAlive = false;
 			animator.SetTrigger("death1");
 			paradoxCauser.ResolveParadox();
 		}
@@ -158,7 +158,7 @@ public class EnemyPatrol : MonoBehaviour, IResettable
 		Debug.Log("Reset Guard");
 		currentPointIndex = 0;
 		transform.position = enemyPoints[currentPointIndex].position;
-		alive = true;
+		isGuardAlive = true;
 		alreadyShot = false;
 		aimingTime = 0;
 

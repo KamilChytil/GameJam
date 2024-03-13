@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,4 +27,19 @@ public class UISceneManager : MonoBehaviour
 			LoadMenu();
 		}
 	}
+
+	public void NextLevel()
+    {
+        int indexLevel = SceneManager.GetActiveScene().buildIndex;
+
+        if (indexLevel != SceneManager.sceneCountInBuildSettings - 1)
+        {
+            SceneManager.LoadScene(indexLevel + 1);
+            return;
+        }
+        SceneManager.LoadScene("Menu");
+
+
+
+    }
 }

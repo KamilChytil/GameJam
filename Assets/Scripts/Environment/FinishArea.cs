@@ -18,7 +18,7 @@ public class FinishArea : MonoBehaviour
 		{
 			if (recording)
 			{
-				if (ParadoxManager.intelDone && ParadoxManager.timeRiftDone)
+				if (ParadoxManager.isIntelPickUp && ParadoxManager.isTimeRiftActive)
 				{
 					recording = false;
 					PlayerPositionRecorder.RecordPlayerPosition(other.transform);

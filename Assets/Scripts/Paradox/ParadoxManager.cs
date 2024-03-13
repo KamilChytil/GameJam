@@ -20,8 +20,8 @@ public class ParadoxManager : MonoBehaviour
 
 	AudioSource audioSource;
 
-	public static bool intelDone = false;
-	public static bool timeRiftDone = false;
+	public static bool isIntelPickUp = false;
+	public static bool isTimeRiftActive = false;
 
 
 	public Material fullscreenMaterial;
@@ -195,8 +195,8 @@ public class ParadoxManager : MonoBehaviour
 		nextParadoxIndex = 0;
 		TimeManager.running = true;
 		TimeManager.elapsedTime = 0;
-		intelDone = false;
-		timeRiftDone = false;
+		isIntelPickUp = false;
+		isTimeRiftActive = false;
 		UIReference.i.loseUI.SetActive(false);
 		UIReference.i.winUI.SetActive(false);
 		paradoxAmount = Paradox.nextOrder;
@@ -205,8 +205,8 @@ public class ParadoxManager : MonoBehaviour
 		{
 			resettable.Reset();
 		}
-		GameObject.Find("checkbox_intel").GetComponent<Toggle>().isOn = intelDone;
-		GameObject.Find("checkbox_restore").GetComponent<Toggle>().isOn = timeRiftDone;
+		GameObject.Find("checkbox_intel").GetComponent<Toggle>().isOn = isIntelPickUp;
+		GameObject.Find("checkbox_restore").GetComponent<Toggle>().isOn = isTimeRiftActive;
 		GameObject.Find("checkbox_escape").GetComponent<Toggle>().isOn = false;
 		if (!FinishArea.recording)
 		{

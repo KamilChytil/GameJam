@@ -19,7 +19,7 @@ public class RestorePoint : MonoBehaviour
 
     private void ButtonPush ()
     {
-        ParadoxManager.timeRiftDone = true;
+        ParadoxManager.isTimeRiftActive = true;
         GameObject.Find("checkbox_restore").GetComponent<Toggle>().isOn = true;
     }
 }

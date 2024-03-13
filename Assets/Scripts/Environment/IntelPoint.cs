@@ -19,7 +19,7 @@ public class IntelPoint : MonoBehaviour
 
     private void ButtonPush ()
     {
-        ParadoxManager.intelDone = true;
+        ParadoxManager.isIntelPickUp = true;
         GameObject.Find("checkbox_intel").GetComponent<Toggle>().isOn = true;
     }
 }
