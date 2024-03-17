@@ -24,6 +24,7 @@ public class FinishArea : MonoBehaviour
 					PlayerPositionRecorder.RecordPlayerPosition(other.transform);
 					PlayerPositionLoader.LoadData();
 					ParadoxManager.EndRecording();
+					DisableTuret.isTuretDisable = false;
 					ResetEverything();
 				}
 			}

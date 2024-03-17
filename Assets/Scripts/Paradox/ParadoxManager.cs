@@ -63,6 +63,16 @@ public class ParadoxManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//if (shouldReset) ResetAll();
+		//screenFlash = Mathf.Lerp(screenFlash, 0, Time.deltaTime * 5);
+		//fullscreenMaterial.SetFloat("_ScreenFlash", screenFlash);
+
+		ShowingParadoxTimeLineUI();
+	}
+
+
+	public  void ShowingParadoxTimeLineUI()
+    {
 		if (shouldReset) ResetAll();
 		screenFlash = Mathf.Lerp(screenFlash, 0, Time.deltaTime * 5);
 		fullscreenMaterial.SetFloat("_ScreenFlash", screenFlash);
@@ -94,7 +104,12 @@ public class ParadoxManager : MonoBehaviour
 				UIReference.i.nextParadoxDescription.color = Color.green;
 			}
 		}
+
 	}
+
+
+
+
 
 	public static void GameOver(string reason = "Bad luck.")
 	{

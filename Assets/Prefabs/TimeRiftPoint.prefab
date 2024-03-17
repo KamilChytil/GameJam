@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6435264284502854053}
   - component: {fileID: 7014341221811869489}
   m_Layer: 0
-  m_Name: RevertPoint
+  m_Name: TimeRiftPoint
   m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
