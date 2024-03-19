@@ -21,7 +21,9 @@ public class Turet : MonoBehaviour
 
     private float startRotationY;
     private bool rotateBackwards = false;
+    private float targetRotationY;
 
+    private Quaternion targetRotation;
 
     private void Start()    
     {
@@ -62,8 +64,8 @@ public class Turet : MonoBehaviour
     private void RotateTurret()
     {
 
-        float targetRotationY = rotateBackwards ? startRotationY : finalTargetRotation;
-        Quaternion targetRotation = Quaternion.Euler(0f, targetRotationY, 0f);
+        targetRotationY = rotateBackwards ? startRotationY : finalTargetRotation;
+        targetRotation = Quaternion.Euler(0f, targetRotationY, 0f);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         if (transform.rotation == targetRotation)
